@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Close Window Example</title>
+    <style>
+           body {
+            background: url(home.png) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <button id="closeButton"></button>
+
+
+    <script>
+        // This only works if the window was opened by window.open()
+        document.getElementById('closeButton').addEventListener('click', function() {
+            window.close();
+        });
+    </script>
+</body>
+</html>

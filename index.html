@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            background: url(index.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .dashboard {
+            text-align: center;
+            margin-top: 50px;
+            /* Moves the title down */
+        }
+
+        .quote {
+            margin-bottom: 20px;
+            /* Space between quote and dashboard */
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            display: none;
+            /* Hidden initially */
+        }
+
+        .app-icon {
+            text-decoration: none;
+            margin: 10px;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 150px;
+        }
+
+        .app-icon:hover {
+            background-color: #0056b3;
+        }
+
+        .timer {
+            text-align: center;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+
+        #time-remaining {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .start-container {
+            position: fixed;
+            top: 80px;
+            /* Adjusted the top position */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            /* Adjusted width to prevent being too large */
+            z-index: 1;
+        }
+
+        .start-container h2 {
+            margin: 0 0 10px;
+        }
+
+        .start-container label {
+            display: block;
+            margin: 5px auto;
+        }
+
+        .start-container .input-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            /* Space between hours and minutes inputs */
+        }
+
+        .start-container input {
+            width: 80px;
+            /* Adjust width as needed */
+            text-align: center;
+        }
+
+        .icon-container {
+            display: grid;
+            grid-template-columns: repeat(3, 150px);
+            /* Three columns with 150px width */
+            gap: 20px;
+            /* Adjusted gap to increase space between icons */
+            justify-content: center;
+            margin-top: 50px;
+            /* Adjusted margin-top for space between timer and icons */
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 200px;
+            display: none;
+            /* Hidden initially */
+        }
+
+        .sidebar-content {
+            display: none;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            background: none;
+            border: none;
+        }
+
+        .top-left-icons {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        .top-left-icons button {
+            background-color: #dc3545;
+            /* Emergency Exit button color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 18px;
+            width: 50px;
+            /* Adjust size as needed */
+            text-align: center;
+        }
+
+        .top-left-icons button:hover {
+            background-color: #c82333;
+        }
+
+        .top-left-icons .logout {
+            background-color: #ffc107;
+            /* Logout button color */
+        }
+
+        .top-left-icons .logout:hover {
+            background-color: #e0a800;
+        }
+
+        .top-left-icons .emergency span,
+        .top-left-icons .logout span {
+            display: block;
+            font-size: 12px;
+            /* Adjust font size for labels */
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <button class="menu-icon">☰</button>
+        <div class="sidebar-content">
+            <a href="https://www.youtube.com"><button class="app-icon" id="youtube">YouTube</button></a>
+            <a href="https://wa.me/7672006300" target="_blank">
+                <button class="app-icon" id="whatsapp">WhatsApp</button>
+            </a>
+            <a href="calc.html"><button class="app-icon">Calculator</button></a>
+            <a href="calender.html"><button class="app-icon">Calendar</button></a>
+            <button class="app-icon" id="code-editors">Code Editors</button>
+            <button class="app-icon" id="todo-list">To-do List</button>
+        </div>
+    </div>
+
+    <div class="quote" id="quote-container" style="color: white;">"Believe you can and you're halfway there"</div>
+
+    <div class="dashboard">
+        <!-- <h1>Dashboard</h1> -->
+        <div class="icon-container">
+            <a href="https://www.youtube.com" target="_blank"><button class="app-icon" id="youtube">YouTube</button></a>
+            <a href="https://wa.me/7672006300" target="_blank"><button class="app-icon"
+                    id="whatsapp">WhatsApp</button></a>
+            <a href="calc.html"><button class="app-icon">Calculator</button></a>
+            <a href="do.html"><button class="app-icon">To Do List</button></a>
+
+            <a href="calender.html"><button class="app-icon">Calendar</button></a>
+            <button class="app-icon" id="code-editors">Code Editors</button>
+            <!-- <button class="app-icon" id="todo-list">To-do List</button> -->
+        </div>
+    </div>
+
+    <div class="start-container" id="start-container">
+        <h2>Set Your Timer</h2>
+        <div class="input-container">
+            <div>
+                <label for="hours-input">Hours:</label>
+                <input id="hours-input" type="number">
+            </div>
+            <div>
+                <label for="minutes-input">Minutes:</label>
+                <input id="minutes-input" type="number">
+            </div>
+        </div>
+        <button id="start-button">Start</button>
+    </div>
+
+    <div class="timer" id="timer-container">
+        <p id="time-remaining">00:00:00</p>
+        <button id="reset-button">Reset</button>
+    </div>
+
+    <div class="top-left-icons">
+        <a href="exit.html"> <button class="emergency">🚨<br><span>Exit</span></button></a>
+        <button class="logout">🔒<br><span>Logout</span></button>
+    </div>
+
+    <script>
+        let seconds = 0;
+        let intervalId;
+
+        document.getElementById('start-button').addEventListener('click', startTimer);
+        document.getElementById('reset-button').addEventListener('click', resetTimer);
+        document.querySelector('.menu-icon').addEventListener('click', toggleSidebar);
+
+        function startTimer() {
+            const hours = parseInt(document.getElementById('hours-input').value);
+            const minutes = parseInt(document.getElementById('minutes-input').value);
+            if (hours >= 0 && minutes >= 0) {
+                seconds = (hours * 3600) + (minutes * 60);
+                intervalId = setInterval(() => {
+                    seconds--;
+                    document.getElementById('time-remaining').innerText = formatTime(seconds);
+                    if (seconds === 0) {
+                        clearInterval(intervalId);
+                        alert("Time's up!");
+                    }
+                }, 1000);
+                document.getElementById('timer-container').style.display = 'block';
+                document.getElementById('start-container').style.display = 'none';
+                document.getElementById('quote-container').style.display = 'block'; // Show quote
+            } else {
+                alert("Please enter valid numbers for hours and minutes");
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(intervalId);
+            seconds = 0;
+            document.getElementById('time-remaining').innerText = '00:00:00';
+            document.getElementById('timer-container').style.display = 'none';
+            document.getElementById('start-container').style.display = 'block';
+            document.getElementById('quote-container').style.display = 'none'; // Hide quote
+        }
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remainingSeconds = seconds % 60;
+            return ` ${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'block' : 'none';
+        }
+
+        
+    </script>
+    <!-- <script src=""></script> -->
+</body>
+
+</html>

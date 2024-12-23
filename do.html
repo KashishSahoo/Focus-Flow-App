@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .todo-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #b3e06a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        td:last-child {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>To-do List</h1>
+
+    <div class="todo-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Task</th>
+                    <th>Completed</th>
+                </tr>
+            </thead>
+            <tbody id="todo-list">
+                <!-- Rows will be added here via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const tasks = [
+            "Arrays", "Arrays 2", "Data Structures", "Linked List", "Stacks", "Queues", "Recursion",
+            "Sorting Algorithms", "Searching Algorithms", "Dynamic Programming", "Greedy Algorithms",
+            "Backtracking", "Graph Basics", "Graph Algorithms", "Tree Traversal", "Binary Search Tree",
+            "Hashing", "Heaps", "Trie", "Segment Trees", "Disjoint Set Union", "Mathematical Algorithms",
+            "Bit Manipulation", "Advanced Sorting", "Divide and Conquer", "String Algorithms", 
+            "Dynamic Programming 2", "Graph Algorithms 2", "Advanced Graph", "Final Review"
+        ];
+
+        function populateTable() {
+            const tableBody = document.getElementById('todo-list');
+            const startDate = new Date('2024-09-12'); // Start date
+
+            tasks.forEach((task, index) => {
+                const row = document.createElement('tr');
+                const dateCell = document.createElement('td');
+                const taskCell = document.createElement('td');
+                const completedCell = document.createElement('td');
+                const checkbox = document.createElement('input');
+                
+                // Increment the date for each task
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + index); // Increment day by index
+
+                // Format date as "DD-MM-YYYY"
+                const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getFullYear()}`;
+
+                dateCell.textContent = formattedDate;
+                taskCell.textContent = task;
+
+                // Create the checkbox for "Completed" column
+                checkbox.type = 'checkbox';
+                checkbox.id = task-`${index + 1}`;
+                checkbox.name = task-`${index + 1}`;
+                
+                completedCell.appendChild(checkbox);
+
+                row.appendChild(dateCell);
+                row.appendChild(taskCell);
+                row.appendChild(completedCell);
+                tableBody.appendChild(row);
+            });
+        }
+
+        populateTable();
+    </script>
+
+</body>
+
+</html>
